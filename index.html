@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="author" content="CSC309 Team 22">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>BookHub</title>
+		<link rel="icon" href="/assets/img/web_icon.png" sizes="16x16" />
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="assets/css/index.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="assets/css/bookhub.css" media="screen" />
+	</head>
+	<body>
+
+		<!-- Full Width Image Header -->
+		<header class="bookhub_header_wrapper">	
+			<!-- Navbar -->
+			<div class="navbar-wrapper">
+				<nav class="navbar navbar-default bookhub_nav">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a class="navbar-brand" href="index.html"><img alt="logo" class="bookhub_logo" src="./assets/img/nav_logo.png" /></a>
+						</div>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="register.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+							<li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+
+
+	        <div class="bookhub_header_content">
+	            <div class="container">
+	                <form>
+						  <div class="form-group bookhub_form_search">
+						    <label for="search_keywords">Search</label>
+						    <input type="text" class="form-control" id="search_keywords" placeholder="Search">
+						  </div>
+						  <div class="form-group bookhub_form_select">
+	                        <label for="condition_filter">Condition</label>
+	                        <select class="form-control selectpicker">
+	                            <option value="0" selected>As new</option>
+	                            <option value="1">Very good</option>
+	                            <option value="2">Good</option>
+	                            <option value="3">Fair</option>
+	                            <option value="4">Poor</option>
+	                        </select>
+	                      </div>
+	                      <div class="form-group bookhub_form_select">
+	                        <label for="price_filter">Maximum price</label>
+	                        <select class="form-control selectpicker">
+	                            <option value="10">$10</option>
+	                            <option value="20">$20</option>
+	                            <option value="30">$30</option>
+	                            <option value="40">$40</option>
+	                            <option value="50">$50</option>
+	                            <option value="60">$100</option>
+	                            <option value="0" selected>unlimited</option>
+	                        </select>
+	                      </div>
+	                      <button type="submit" class="btn btn-default bookhub_form_btn">Submit</button>
+					</form>
+	            </div>
+	        </div>
+	    </header>
+
+
+
+		<!-- includes -->
+		<script src="https://fb.me/react-15.0.1.js"></script>
+		<script src="https://fb.me/react-dom-15.0.1.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+		<!-- included bootstrap js dependency files -->
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  		<!-- include bootstrap css file -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+		
+		<!-- JS -->
+		<script src="assets/js/index.js" type="text/babel"></script>
+		
+
+	</body>
+</html>

@@ -1,0 +1,39 @@
+.bookhub_nav{
+	border-radius: 0px;
+}
+.bookhub_logo{
+	height: 30px;
+	margin: -5px 0px 0px 0px;
+}
+
+.bookhub_header_wrapper {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: url('http://boundless.utoronto.ca/assets/ways-to-give/stocks-securities/U-of-T-Campus@2x.jpg') no-repeat center center scroll;
+    background-size: cover;
+}
+.bookhub_header_content{
+	height: 400px;
+}
+.bookhub_header_content form{
+	margin: 150px 0;
+}
+
+.bookhub_form_select{
+	width: 20%;
+	display: inline-block;
+}
+.bookhub_form_search label, .bookhub_form_select label{
+	color: GHOSTWHITE;
+	text-align: left;
+	float: left;
+	font-size: 12px;
+}
+.bookhub_form_search{
+	width: 40%;
+	display: inline-block;
+	
+}
+.bookhub_form_btn{
+}
