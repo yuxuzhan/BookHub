@@ -23,9 +23,9 @@ Other
     /assets/img/ (icon, coverphoto, background photo and etc.)
 ```
 In addition, credit to
-```
-[Bootstrap](http://getbootstrap.com/): Front-End framework
-```
+
+- Front-End framework: [Bootstrap](http://getbootstrap.com/)
+
 ---
 ###Back-End File Included
 ```
