@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="author" content="CSC309 Team 22">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>BookHub</title>
+		<link rel="icon" href="/assets/img/web_icon.png" sizes="16x16" />
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="assets/css/bookhub.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="assets/css/viewbook.css" media="screen" />
+	</head>
+	<body>
+
+		<!-- Full Width Image Header -->
+		<header class="bookhub_header_wrapper">	
+			<!-- Navbar -->
+			<div class="navbar-wrapper">
+				<nav class="navbar navbar-default bookhub_nav">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a class="navbar-brand" href="index.html"><img alt="logo" class="bookhub_logo" src="./assets/img/nav_logo.png" /></a>
+						</div>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+							<li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</header>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					<div class="row">
+						<h2>Book Title</h2>
+						<div class="col-md-4">
+							<!--book image-->
+							<div class="bookhub_viewbook_wrapper">
+								<img src="./assets/img/web_icon.png" alt="book_img"/>
+							</div>
+						</div>
+						<div class="col-md-8">
+							<!--book content and discription-->
+							<div class="bookhub_viewbook_wrapper">
+							<table class="table">
+								<tbody>
+									<tr>
+										<th>Author</th>
+										<td>xxx</td>
+									</tr>
+									<tr>
+										<th>Course Code</th>
+										<td>xxx</td>
+									</tr>
+									<tr>
+										<th>Price</th>
+										<td>xxx</td>
+									</tr>
+									<tr>
+										<th>Condition</th>
+										<td>xxx</td>
+									</tr>
+									<tr>
+										<th>Description</th>
+										<td>xxxxxxxxxxxxxxxxxx</td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-3">
+					<!--seller info-->
+					<div class="bookhub_viewbook_wrapper">
+					<h3>About Seller</h3>
+					<table class="table">
+						<tbody>
+							<tr>
+    							<th>username</th>
+    							<td><a href="profile.html">xxx</a></td>
+    						</tr>
+    						<tr>
+    							<th>Email</th>
+    							<td>xxx</td>
+    						</tr>
+    						<tr>
+    							<th>Phone</th>
+    							<td>xxx</td>
+    						</tr>
+    						<tr>
+    							<th>Sccore</th>
+    							<td>xxx</td>
+    						</tr>
+						</tbody>
+					</table>
+					<a href="mailto:xxx@mail.com" class="btn btn-primary" target="_top" type="button">Contact Seller</a>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<footer>
+	    	<p>Copyright @ BookHub</p>
+	    </footer>
+
+
+		<!-- includes -->
+		<script src="https://fb.me/react-15.0.1.js"></script>
+		<script src="https://fb.me/react-dom-15.0.1.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+		<!-- included bootstrap js dependency files -->
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  		<!-- include bootstrap css file -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+		<!-- JS -->
+		<script src="assets/js/viewbook.js" type="text/babel"></script>
+		
+
+	</body>
+</html>
