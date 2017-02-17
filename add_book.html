@@ -15,18 +15,28 @@
 		<header>
 			<!-- Navbar -->
 			<div class="navbar-wrapper">
-				<nav class="navbar navbar-default bookhub_nav">
-					<div class="container-fluid">
-						<div class="navbar-header">
-							<a class="navbar-brand" href="index.html"><img alt="logo" class="bookhub_logo" src="./assets/img/nav_logo.png" /></a>
-						</div>
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-							<li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-						</ul>
-					</div>
-				</nav>
-			</div>
+                <nav class="navbar navbar-default bookhub_nav">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="index.html"><img alt="logo" class="bookhub_logo" src="./assets/img/nav_logo.png" /></a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">My BookHub
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="edit_profile.html">Edit Profile</a></li>
+                                  <li><a href="listing.html">My Posts</a></li>
+                                  <li><a href="cart.html">My Cart</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="register.html"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+                            <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
 	    </header>
 
         <div class="container-fluid">
