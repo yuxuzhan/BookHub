@@ -14,10 +14,19 @@ HTML (open in browser to view content of each page)
     viewbook.html - show detail of listed book information
     add_book/update_book.html - add/update book for selling
     profile/edit_profile.html - show/edit profile for logged in user
+    cart.html - shopping cart page
+    listing.html - show my post listing history
 
 CSS
+    Mainly using bootstrap Framework (CDN inside html)
     /assets/css/
-        index.css, login.css, register.css, viewbook.css, add_book.css, update_book.css profile.css, edit_profile.css
+        index.css, login.css, register.css, add_book.css, profile.css, cart.css, listing.css
+        bookhub.css - used for all pages
+
+Javascript:
+    Mainly using bootstrap Framework (CDN inside html)
+    More will be added when back-end is ready
+
 
 Other
     /assets/img/ (icon, coverphoto, background photo and etc.)
