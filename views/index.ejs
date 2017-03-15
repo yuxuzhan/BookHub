@@ -1,0 +1,71 @@
+<% include header %>
+<div class="fluid-container">
+    <div class="search_wrapper">
+    <form>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="search_keywords">Name</label>
+            <input type="text" class="form-control" id="search_keywords" placeholder="Search">
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="condition_filter">Condition</label>
+            <select  class="form-control" id="condition_filter">
+                <option value="4">As new</option>
+                <option value="3">Better Than Good</option>
+                <option value="2">Better Than Fair</option>
+                <option value="1">Better Than Poor</option>
+                <option value="0" selected>Everything</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="price_filter">Price</label>
+            <select class="form-control" id="price_filter">
+                <option value="10">$10 or less</option>
+                <option value="20">$20 or less</option>
+                <option value="30">$30 or less</option>
+                <option value="40">$40 or less</option>
+                <option value="50">$50 or less</option>
+                <option value="60">$100 or less</option>
+                <option value="0" selected>Unlimited</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-2" >
+            <button type="submit" class="form-control btn btn-default btn-md-margin">Submit</button>
+        </div>
+    </div>
+    </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                  <th>Picture</th>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Course Code</th>
+                  <th>Condition</th>
+                  <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img class="bookhub_thumb_img" src="/img/web_icon.png" alt="shabi"></td>
+                    <td><a href="viewbook.html">Testing title</a></td>
+                    <td>Testing author</td>
+                    <td>Testing code</td>
+                    <td>Testing condition</td>
+                    <td>Testing price</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+    </div>
+</div>
+<% include footer %>

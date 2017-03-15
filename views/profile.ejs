@@ -1,0 +1,93 @@
+<% include header%>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-4">
+            <h2><%= user.name %></h2>
+        </div>
+        <div class="col-md-4">
+            <img src="<%=user.image.data %>" class="bookhub_profile_img" alt="profile_img"/>
+        </div>
+        <div class="col-md-8">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Email</th>
+                        <td><%= user.email %></td>
+                    </tr>
+                    <tr>
+                        <th>Phone</th>
+                        <td><%= user.phone %></td>
+                    </tr>
+                    <tr>
+                        <th>Score</th>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="pill" href="#review">Reviews</a></li>
+            <li><a data-toggle="pill" href="#listing">Listings</a></li>
+        </ul>
+
+        <div class="tab-content">
+        <div id="review" class="tab-pane fade in active">
+            <table class="table">
+            <tbody>
+            </tbody>
+            </table>
+
+            <form>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="review">Review the seller</label>
+                        <textarea class="form-control" id="review" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-2">
+                    <label for="rate">Rate the seller</label>
+                        <select class="form-control" id="rate">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <div id="listing" class="tab-pane fade">
+            <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                          <th>Picture</th>
+                          <th>Title</th>
+                          <th>Author</th>
+                          <th>Course Code</th>
+                          <th>Condition</th>
+                          <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+<% include footer %>
