@@ -2,33 +2,49 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 // set up a mongoose model and pass it using module.exports
-var userSchema  =  new Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true
+var bookSchema  =  new Schema({
+    user: {
+        type:String,
+        required:true
     },
-    name: {
+    booktitle: {
         type: String,
         required: true
     },
-    password: {
-        type: String,
+    author: {
+        type: String
+    },
+    ISBN: {
+        type: String
+    },
+    courseCode: {
+        type: String
+    },
+    price:{
+        type: Number,
         required: true
+    },
+    condition:{
+        type: Number
+    },
+    description:{
+        type: String
     },
     image: {
         data: Buffer,
         contentType: String
     },
-    phone: String,
+    sold: {
+        type: Boolean
+    },
     created_at: Date,
     updated_at: Date
 },{
-    collection: 'user'
+    collection: 'book'
 });
 
 
-userSchema.pre('save', function (next) {
+bookSchema.pre('save', function (next) {
 
     // get the current date
     var currentDate = new Date();
@@ -40,15 +56,5 @@ userSchema.pre('save', function (next) {
     next();
 });
 
-//methods for password encription
-var bcrypt   = require('bcrypt-nodejs');
-userSchema.methods.generateHash = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
-
-userSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.password);
-};
-
 // Doc for Mongoose Connections: http://mongoosejs.com/docs/connections
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('book', bookSchema);

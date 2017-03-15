@@ -35,6 +35,11 @@
     background-size: cover;
 }
 
+.button_right{
+	float:right;
+	display: block;
+}
+
 /*footer style*/
 footer {
   background-color: GAINSBORO;
