@@ -5,11 +5,15 @@
   -o-background-size: cover;
   background-size: cover;
 }
-.search_wrapper{
+.result_search_wrapper{
 	width: 100%;
 	background-image: url('../img/uoft_campus.jpg');
-	padding: 15% 5%;
+	padding: 5%;
 	margin: -20px 0 20px 0;
+}
+.search_wrapper{
+	width: 100%;
+	padding: 15% 5%;
 }
 .btn-md-margin{
 	margin-top: 25px;

@@ -1,6 +1,6 @@
-<% include header_background %>
+<% include header %>
 <div class="fluid-container">
-    <div class="search_wrapper">
+    <div class="result_search_wrapper">
     <form method="get" action="/search">
     <div class="row">
         <div class="form-group col-md-4">
@@ -35,6 +35,31 @@
         </div>
     </div>
     </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                  <th>Picture</th>
+                  <th>Title</th>
+                  <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i=0; i < books.length; i++){ %>
+                <tr>
+                    <td><img class="bookhub_thumb_img" src="<%= books[i].image.data %>" alt="book_image"></td>
+                    <td><a href="/viewbook/<%= books[i]._id %>"><%= books[i].booktitle %></a></td>
+                    <td><%= books[i].price %></td>
+                </tr>
+                <% } %>
+            </tbody>
+
+        </table>
+    </div>
     </div>
 </div>
 <% include footer %>

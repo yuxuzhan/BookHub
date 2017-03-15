@@ -27,14 +27,16 @@
                         <% if(books_avaliable) {%>
                             <% for (var i=0; i < books_avaliable.length; i++) {%>
                             <tr>
-                                <td scope="row"><img src="<%=books_avaliable[i].image.data%>"></td>
+                                <td scope="row"><img class="bookhub_thumb_img" src="<%=books_avaliable[i].image.data%>"></td>
                                 <td><a href="/viewbook/<%=books_avaliable[i]._id%>"><%=books_avaliable[i].booktitle%></a></td>
                                 <td><%=books_avaliable[i].author%></td>
                                 <td><%=books_avaliable[i].ISBN%></td>
                                 <td><%=books_avaliable[i].courseCode%></td>
                                 <td><%=books_avaliable[i].condition%></td>
                                 <td><%=books_avaliable[i].price%></td>
-                                <td><a href="/updatebook/<%=books_avaliable[i]._id%>">edit</a></td>
+                                <td><a href="/updatebook/<%=books_avaliable[i]._id%>">edit</a><br/>
+                                    <a href="/booksold/<%=books_avaliable[i]._id%>">sold</a>
+                                </td>
                             </tr>
                             <% } %>
                         <% } %>
@@ -55,7 +57,6 @@
                             <th>Course Code</th>
                             <th>Condition</th>
                             <th>Price</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,7 +70,6 @@
                                 <td><%=books_sold[i].courseCode%></td>
                                 <td><%=books_sold[i].condition%></td>
                                 <td><%=books_sold[i].price%></td>
-                                <td><a href="/updatebook/<%=books_sold[i]._id%>">edit</a></td>
                             </tr>
                             <% } %>
                         <% } %>

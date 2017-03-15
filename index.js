@@ -5,6 +5,7 @@ var fs = require('fs');
 var mongoose = require('mongoose');
 var Users = require('./models/user');
 var Books = require("./models/book");
+var Reviews = require("./models/review");
 var app = express();
 var multer = require('multer');
 var upload = multer({ dest: './public/uploads' });
@@ -95,7 +96,17 @@ app.get('/profile/:id',function(req, res, next){
             console.log('user not exist');
             res.sendStatus(403);
         } else {
-            res.render('profile.ejs', { userid: req.session.userid, user:user } );
+            Reviews.find({'seller':req.params.id},function (err, reviews) {
+                var sum = 0;
+                reviews.forEach(function(review){
+                    sum += parseInt(review.rate);
+                });
+                var score = sum/reviews.length;
+                score = score.toFixed(2);
+                Books.find({'user':req.params.id,'sold':false}, function(err, books){
+                    res.render('profile.ejs', { userid: req.session.userid, user:user, reviews: reviews, score: score, books: books});
+                });
+            });
         }
     });
 });
@@ -125,7 +136,15 @@ app.get('/viewbook/:id',function(req, res){
             res.sendStatus(403);
         } else {
             Users.findOne({'_id' : book.user}, function (err, seller) {
-                res.render('viewbook.ejs', {userid: req.session.userid, book:book, seller:seller} );
+                Reviews.find({'seller': book.user},function (err, reviews) {
+                    var sum = 0;
+                    reviews.forEach(function(review){
+                        sum += parseInt(review.rate);
+                    });
+                    var score = sum/reviews.length;
+                    score = score.toFixed(2);
+                    res.render('viewbook.ejs', {userid: req.session.userid, book:book, seller:seller, score: score} );
+                });
             });
         }
     });
@@ -143,9 +162,9 @@ app.get('/addbook',function(req, res,next){
 
 app.get('/mypost',function(req, res,next){
     if(req.session.userid){
-        Books.find({'user':req.session.userid,'sold':true}, function (err, books_avaliable) {
+        Books.find({'user':req.session.userid,'sold':false}, function (err, books_avaliable) {
             console.log(books_avaliable);
-            Books.find({'user':req.session.userid,'sold':false}, function (err, books_sold) {
+            Books.find({'user':req.session.userid,'sold':true}, function (err, books_sold) {
                 console.log(books_sold);
                 res.render('mypost.ejs',{userid: req.session.userid,books_avaliable:books_avaliable,books_sold:books_sold});
             });
@@ -166,6 +185,69 @@ app.get('/updatebook/:id',function(req, res,next){
             if (book.user === req.session.userid){
                 res.render('update_book.ejs',{userid: req.session.userid, book: book});
             }
+        }
+    });
+});
+
+app.all('/booksold/:id',function(req, res){
+    if(!req.session.userid){
+        console.log("user not logged in, redirect to login page");
+        res.redirect('/login',{userid: ""});
+    } else {
+        Books.findOne({'_id':req.params.id},function(err,book){
+            book.sold = true;
+            book.save(function(err, updateBook) {
+               if(err){
+                   console.log("error occured when updating book to sold");
+                   throw err;
+               }
+               res.redirect('/mypost');
+           });
+       });
+   }
+});
+
+app.get('/search',function(req, res){
+    var keywords = req.query['keywords'].split(" ");
+    var query = [];
+    var condition = parseInt(req.query['condition']);
+    var price = parseFloat(req.query['price']);
+    if(price === 0){
+        keywords.forEach(function (keyword) {
+            var l = {'booktitle' : { $regex: keyword, $options: 'i' } , 'condition' : { $gt: condition}, 'sold':false};
+            query.push(l);
+        });
+        keywords.forEach(function(keyword){
+            var l = {'courseCode' : { $regex: keyword, $options: 'i' } , 'condition' : { $gt: condition}, 'sold':false};
+            query.push(l);
+        });
+        keywords.forEach(function(keyword){
+            var l = {'ISBN' : { $regex: keyword, $options: 'i' } , 'condition' : { $gt: condition}, 'sold':false};
+            query.push(l);
+        });
+    } else {
+        keywords.forEach(function(keyword){
+            var l = {'booktitle' : { $regex: keyword, $options: 'i' } , 'price' : { $lt: price}, 'condition' : { $gt: condition}, 'sold':false};
+            query.push(l);
+        });
+        keywords.forEach(function(keyword){
+            var l = {'courseCode' : { $regex: keyword, $options: 'i' } , 'price' : { $lt: price}, 'condition' : { $gt: condition}, 'sold':false};
+            query.push(l);
+        });
+        keywords.forEach(function(keyword){
+            var l = {'ISBN' : { $regex: keyword, $options: 'i' } , 'price' : { $lt: price}, 'condition' : { $gt: condition}, 'sold':false};
+            query.push(l);
+        });
+    }
+    Books.find({$or: query}, function (err, books) {
+        if (!books){
+            //user (email) already exist
+            console.log('book not exist');
+            res.sendStatus(403);
+        } else {
+            console.log("search books for: " + req.query);
+            res.render('result.ejs',{userid: req.session.userid, books: books});
+
         }
     });
 });
@@ -346,6 +428,30 @@ app.post('/updatebook/:id',upload.single("file"),function(req, res,next){
                }
             });
         }
+    });
+});
+
+app.post('/review/:id',function(req, res){
+    var seller = req.params.id;
+    var buyer = "Anonymous";
+    if(req.session.user){
+        buyer = req.session.user;
+    }
+    var rate = parseInt(req.body.rate);
+    var review = new Reviews({
+        seller: seller,
+        buyer: buyer,
+        review: req.body.review,
+        rate: rate
+    });
+    review.save(function(err, newReview) {
+       if (err){
+           console.log("error occured when saving review");
+           throw err;
+       } else {
+           console.log("successully saved review");
+           res.redirect('/profile/' + req.params.id);
+       }
     });
 });
 

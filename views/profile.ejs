@@ -20,7 +20,7 @@
                     </tr>
                     <tr>
                         <th>Score</th>
-                        <td></td>
+                        <td><%= score %>/5</td>
                     </tr>
                 </tbody>
             </table>
@@ -38,20 +38,36 @@
         <div id="review" class="tab-pane fade in active">
             <table class="table">
             <tbody>
+                <thead>
+                    <tr>
+                      <th>Reviewer</th>
+                      <th>Rate</th>
+                      <th>Review</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (var i=0; i < reviews.length; i++){ %>
+                    <tr>
+                        <td><%= reviews[i].buyer %></td>
+                        <td><%= reviews[i].rate %>/5</td>
+                        <td><%= reviews[i].review %></td>
+                    </tr>
+                    <% } %>
+                </tbody>
             </tbody>
             </table>
 
-            <form>
+            <form method="post" action="/review/<%= user._id %>">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="review">Review the seller</label>
-                        <textarea class="form-control" id="review" rows="3"></textarea>
+                        <textarea class="form-control" name="review" id="review" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-2">
                     <label for="rate">Rate the seller</label>
-                        <select class="form-control" id="rate">
+                        <select class="form-control" name="rate" id="rate">
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -72,13 +88,17 @@
                         <tr>
                           <th>Picture</th>
                           <th>Title</th>
-                          <th>Author</th>
-                          <th>Course Code</th>
-                          <th>Condition</th>
                           <th>Price</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <% for (var i=0; i < books.length; i++){ %>
+                        <tr>
+                            <td><img class="bookhub_thumb_img" src="<%= books[i].image.data %>" alt="book_image"></td>
+                            <td><a href="/viewbook/<%= books[i]._id %>"><%= books[i].booktitle %></a></td>
+                            <td><%= books[i].price %></td>
+                        </tr>
+                        <% } %>
                     </tbody>
                 </table>
             </div>

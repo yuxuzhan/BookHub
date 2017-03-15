@@ -34,7 +34,13 @@
                                     </tr>
                                     <tr>
                                         <th>Condition</th>
-                                        <td><%=book.condition%></td>
+                                        <td>
+
+                                            <% if (book.condition === 1) { %> Poor
+                                            <% } else if ( book.condition === 2) { %> Fair
+                                            <% } else if ( book.condition === 3) { %> Good
+                                            <% } else { %> As New <% } %>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Description</th>
@@ -67,7 +73,7 @@
                     </tr>
                     <tr>
                         <th>Score</th>
-                        <td></td>
+                        <td><%= score %>/5</td>
                     </tr>
                 </tbody>
             </table>
