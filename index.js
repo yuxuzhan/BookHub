@@ -156,7 +156,7 @@ app.get('/viewbook/:id',function(req, res){
 app.get('/addbook',function(req, res,next){
     if(req.session.userid){
         //user logged in
-        res.render('add_book.ejs',{userid: req.session.userid});
+        res.render('add_book.ejs',{userid: req.session.userid, error:""});
     } else {
         res.redirect('/login');
     }
@@ -393,8 +393,8 @@ app.post('/addbook', upload.single('file'), function(req, res) {
 
     book.save(function(err, newBook) {
        if (err){
-           console.log("error occured when add books");
-           res.redirect('/');
+           console.log("error occured when add books by ISBN");
+           res.render('add_book.ejs', {userid: req.session.userid,error: 'Book is not added by Manual Input'});
        } else {
            console.log("successully add book: " + newBook.booktitle);
            res.redirect('/viewbook/' + newBook._id);
@@ -407,8 +407,8 @@ app.post('/addbook_byISBN', upload.single('file'), function(req, res) {
 
     isbn.resolveGoogle(req.body.ISBN_autofill,function(err, data){
         if(err){
-            console.log(err);
-            res.redirect('/');
+            console.log("error occured when add books by ISBN");
+            res.render('add_book.ejs', {userid: req.session.userid,error: 'Wrong ISBN, book is not added'});
         }else{
             console.log(data);
             var book = new Books();
@@ -422,7 +422,7 @@ app.post('/addbook_byISBN', upload.single('file'), function(req, res) {
             book.booktitle = data.title;
             var author = "";
             for (var i = 0; i < data.authors.length; i++){
-                author += data.authors[i] + " & ";
+                author += data.authors[i] + " ";
             }
             book.author = author;
             if(data.description){
@@ -446,8 +446,8 @@ app.post('/addbook_byISBN', upload.single('file'), function(req, res) {
             console.log(book.title);
             book.save(function(err, newBook) {
                if (err){
-                   console.log("error occured when add books");
-                   res.redirect('/');
+                   console.log("error occured when add books by ISBN");
+                   res.render('add_book.ejs', {userid: req.session.userid,error: 'book is not added by ISBN somehow'});
                } else {
                    console.log("successully add book: " + newBook.booktitle);
                    res.redirect('/viewbook/' + newBook._id);
