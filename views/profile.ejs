@@ -20,7 +20,11 @@
                     </tr>
                     <tr>
                         <th>Score</th>
+                        <% if(isNaN(score)) {%>
+                        <td>No score yet</td>
+                        <% }else{ %>
                         <td><%= score %>/5</td>
+                        <% } %>
                     </tr>
                 </tbody>
             </table>

@@ -9,6 +9,8 @@ var Reviews = require("./models/review");
 var app = express();
 var multer = require('multer');
 var upload = multer({ dest: './public/uploads' });
+var isbn = require('./isbn');
+
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/bookhub');
@@ -360,20 +362,24 @@ app.post('/user/update',upload.single('file'),function(req, res){
     }
 });
 
+
 // Getting the value from a form input:
 app.post('/addbook', upload.single('file'), function(req, res) {
     console.log("add books");
     var book = new Books();
     var filename;
-    book.user = req.session.userid;
+
     book.booktitle = req.body.bookname;
     book.author = req.body.author;
+    book.description = req.body.description;
+    book.user = req.session.userid;
     book.ISBN = req.body.ISBN;
     book.courseCode = req.body.courseCode;
-    book.price = req.body.price;
     book.condition = req.body.condition;
+    book.price = req.body.price;
     book.description = req.body.description;
     book.sold = false;
+
     var filename = '/img/default_book.png';
     if(req.file){
         filename = '/uploads/' + (new Date).valueOf() + '-' + req.file.originalname;
@@ -381,18 +387,78 @@ app.post('/addbook', upload.single('file'), function(req, res) {
             if(err) throw err;
         });
     }
+
     book.image.data = filename.toString("binary");
     book.image.contentType = "image/png";
+
     book.save(function(err, newBook) {
        if (err){
            console.log("error occured when add books");
-           throw err;
+           res.redirect('/');
        } else {
            console.log("successully add book: " + newBook.booktitle);
            res.redirect('/viewbook/' + newBook._id);
        }
    });
 });
+
+app.post('/addbook_byISBN', upload.single('file'), function(req, res) {
+    console.log("add books by ISBN");
+
+    isbn.resolveGoogle(req.body.ISBN_autofill,function(err, data){
+        if(err){
+            console.log(err);
+            res.redirect('/');
+        }else{
+            console.log(data);
+            var book = new Books();
+            var filename;
+            book.user = req.session.userid;
+            book.ISBN = req.body.ISBN_autofill;
+            book.courseCode = req.body.courseCode_autofill;
+            book.condition = req.body.condition_autofill;
+            book.price = req.body.price_autofill;
+            book.sold = false;
+            book.booktitle = data.title;
+            var author = "";
+            for (var i = 0; i < data.authors.length; i++){
+                author += data.authors[i] + " & ";
+            }
+            book.author = author;
+            if(data.description){
+                book.description = data.description;
+            }
+            if(data.imageLinks.thumbnail){
+                book.image.data = data.imageLinks.thumbnail.toString("binary");
+                book.image.contentType = "image/png";
+            }else{
+                var filename = '/img/default_book.png';
+                if(req.file){
+                    filename = '/uploads/' + (new Date).valueOf() + '-' + req.file.originalname;
+                    fs.rename(req.file.path, 'public' + filename, function(err){
+                        if(err) throw err;
+                    });
+                }
+
+                book.image.data = filename.toString("binary");
+                book.image.contentType = "image/png";
+            }
+            console.log(book.title);
+            book.save(function(err, newBook) {
+               if (err){
+                   console.log("error occured when add books");
+                   res.redirect('/');
+               } else {
+                   console.log("successully add book: " + newBook.booktitle);
+                   res.redirect('/viewbook/' + newBook._id);
+               }
+           });
+        }
+    });
+});
+
+
+
 
 app.post('/updatebook/:id',upload.single("file"),function(req, res,next){
     Books.findOne({'_id' : req.params.id}, function (err, book) {
