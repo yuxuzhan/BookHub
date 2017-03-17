@@ -19,7 +19,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
       //check if user is already existed in db
       Users.find({'email' : req.body.email}, function (err, records) {
           console.log("checking if user already exists");
-          if (records){
+          if (records.length > 0){
               //user (email) already exist
               console.log('user exists: ' + req.body.email);
               res.render('signup.ejs',{userid: "", error: 'user exists: ' + req.body.email});
