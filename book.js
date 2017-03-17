@@ -194,7 +194,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs, isb
             } else {
                 Users.findOne({'_id' : book.user}, function (err, seller) {
                     if (Reviews){
-                        Reviews.find({'seller': book.user},function (err, reviews) {
+                        Reviews.find({'seller': seller.userId},function (err, reviews) {
                             var sum = 0;
                             reviews.forEach(function(review){
                                 sum += parseInt(review.rate);
