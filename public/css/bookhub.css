@@ -43,6 +43,11 @@
 	float:right;
 	display: block;
 }
+.error_page{
+    width: 50%;
+    margin: 0 25%;
+
+}
 
 /*footer style*/
 footer {

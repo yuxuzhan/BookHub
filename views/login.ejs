@@ -7,6 +7,9 @@
                 <h3 class="panel-title">Login</h3>
             </div>
             <div class="panel-body">
+            <% if (error !== 'undefined' || error.length > 0) { %>
+              <div class="alert-danger"><%= error %></div>
+            <% } %>
             <form accept-charset="UTF-8" action="/login" method="post">
                 <div class="form-group col-lg-12">
                     <label>Email Address</label>

@@ -19,7 +19,7 @@
                         <div class="tab-content">
                             <div id="active" class="tab-pane fade in active">
 
-                                <form method="post" enctype="multipart/form-data" action="/addbook">
+                                <form method="post" enctype="multipart/form-data" action="/books">
 
                                     <div class="form-group col-lg-12">
                                         <label>Book Name</label>
@@ -43,7 +43,7 @@
 
                                     <div class="form-group col-lg-12">
                                         <label>Price</label>
-                                        <input type="number" name="price" class="form-control" id="" value="" required>
+                                        <input type="number" step="0.01" name="price" class="form-control" id="" value="" required>
                                     </div>
 
                                     <div class="form-group col-lg-6">
@@ -73,7 +73,7 @@
                             </div>
 
                             <div id="autofill" class="tab-pane fade">
-                                <form method="post" enctype="multipart/form-data" action="/addbook_byISBN">
+                                <form method="post" enctype="multipart/form-data" action="/books/ISBN">
 
                                     <div class="form-group col-lg-12">
                                         <label>ISBN</label>
@@ -87,7 +87,7 @@
 
                                     <div class="form-group col-lg-12">
                                         <label>Price</label>
-                                        <input type="number" name="price_autofill" class="form-control" id="" value="" required>
+                                        <input type="number" step="0.01" name="price_autofill" class="form-control" id="" value="" required>
                                     </div>
 
                                     <div class="form-group col-lg-6">

@@ -99,7 +99,7 @@
                         <% for (var i=0; i < books.length; i++){ %>
                         <tr>
                             <td><img class="bookhub_thumb_img" src="<%= books[i].image.data %>" alt="book_image"></td>
-                            <td><a href="/viewbook/<%= books[i]._id %>"><%= books[i].booktitle %></a></td>
+                            <td><a href="/books/<%= books[i].bookId %>"><%= books[i].booktitle %></a></td>
                             <td><%= books[i].price %></td>
                         </tr>
                         <% } %>

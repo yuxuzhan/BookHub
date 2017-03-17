@@ -2,7 +2,7 @@
 <div class="container">
 <h2>My Listings</h2>
     <div class="row">
-        <a href="/addbook" class="btn btn-md btn-primary button_right">add new book</a>
+        <a href="/books" class="btn btn-md btn-primary button_right">add new book</a>
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="pill" href="#active">Active</a></li>
             <li><a data-toggle="pill" href="#sold">Sold</a></li>
@@ -28,14 +28,14 @@
                             <% for (var i=0; i < books_avaliable.length; i++) {%>
                             <tr>
                                 <td scope="row"><img class="bookhub_thumb_img" src="<%=books_avaliable[i].image.data%>"></td>
-                                <td><a href="/viewbook/<%=books_avaliable[i]._id%>"><%=books_avaliable[i].booktitle%></a></td>
+                                <td><a href="/books/<%=books_avaliable[i].bookId%>"><%=books_avaliable[i].booktitle%></a></td>
                                 <td><%=books_avaliable[i].author%></td>
                                 <td><%=books_avaliable[i].ISBN%></td>
                                 <td><%=books_avaliable[i].courseCode%></td>
                                 <td><%=books_avaliable[i].condition%></td>
                                 <td><%=books_avaliable[i].price%></td>
-                                <td><a href="/updatebook/<%=books_avaliable[i]._id%>">edit</a><br/>
-                                    <a href="/booksold/<%=books_avaliable[i]._id%>">sold</a>
+                                <td><a href='/books/update/<%=books_avaliable[i].bookId%>'>edit</a><br/>
+                                    <a class="sold_book" id="/books/sold/<%=books_avaliable[i].bookId%>" href="">sold</a>
                                 </td>
                             </tr>
                             <% } %>
@@ -63,8 +63,8 @@
                         <% if(books_sold) {%>
                             <% for (var i=0; i < books_sold.length; i++) {%>
                             <tr>
-                                <td scope="row"><img class="bookhub_thumb_img" src="<%=books_sold[i].image.data%>"></td>
-                                <td><a href="/viewbook/<%=books_sold[i]._id%>"><%=books_sold[i].booktitle%></a></td>
+                                <td><img class="bookhub_thumb_img" src="<%=books_sold[i].image.data%>"></td>
+                                <td><a href="/books/<%=books_sold[i].bookId%>"><%=books_sold[i].booktitle%></a></td>
                                 <td><%=books_sold[i].author%></td>
                                 <td><%=books_sold[i].ISBN%></td>
                                 <td><%=books_sold[i].courseCode%></td>
@@ -81,4 +81,13 @@
     </div>
     </div>
 </div>
+
+<script>
+$('a.sold_book').click(function(e){
+    $.ajax({
+        url: e.target.id,
+        method: 'PUT'
+    });
+});
+</script>
 <% include footer%>
