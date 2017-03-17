@@ -3,11 +3,20 @@ BookHub is a website for UofT students to buy, sell or trade used textbooks for 
 
 
 
-## Run the web application
+## Run the web application (Must Run in Order!!)
 ```
+First Terminal:
+$ mongod
+
+Second Terminal: (to import prepared database)
+$ cd mongoexport
+$ mongoimport --db database --collection user --file user.json
+$ mongoimport --db database --collection book --file book.json
+$ mongoimport --db database --collection review --file review.json
+
+Third Terminal:
 $ cd to the directory
 $ npm install
-$ mongod (open by another terminal)
 $ node index.js
 Enter localhost:3000/ in browser
 ```
