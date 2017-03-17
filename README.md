@@ -15,7 +15,7 @@ $ mongoimport --db database --collection book --file book.json
 $ mongoimport --db database --collection review --file review.json
 
 Third Terminal:
-$ cd to the directory
+$ cd back to Team22-BookHub/
 $ npm install
 $ node index.js
 Enter localhost:3000/ in browser
