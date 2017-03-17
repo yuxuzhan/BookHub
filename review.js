@@ -19,7 +19,7 @@ app.post('/review/:id',function(req, res){
            throw err;
        } else {
            console.log("successully saved review");
-           res.redirect('/users/' + user.userId);
+           res.redirect('/users/' + req.params.id);
        }
     });
 });
