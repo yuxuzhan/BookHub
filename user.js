@@ -117,7 +117,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
                         });
                         var score = sum/reviews.length;
                         score = score.toFixed(2);
-                        Books.find({'user':user.userId,'sold':false}, function(err, books){
+                        Books.find({'user':user._id,'sold':false}, function(err, books){
                             res.render('profile.ejs', { userid: req.session.userId, user:user, reviews: reviews, score: score, books: books});
                         });
                     });
