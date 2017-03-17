@@ -39,9 +39,9 @@
         </ul>
 
         <div class="tab-content">
-        <div id="review" class="tab-pane fade in active">
+        <div class="tab-pane fade in active">
             <table class="table">
-            <tbody>
+
                 <thead>
                     <tr>
                       <th>Reviewer</th>
@@ -58,14 +58,13 @@
                     </tr>
                     <% } %>
                 </tbody>
-            </tbody>
             </table>
 
             <form method="post" action="/review/<%= user.userId %>">
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="review">Review the seller</label>
-                        <textarea class="form-control" name="review" id="review" rows="3"></textarea>
+                        <label>Review the seller</label>
+                        <textarea class="form-control" name="review" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="row">
@@ -111,7 +110,6 @@
 
         </div>
         </div>
-    </div>
     </div>
 </div>
 <% include footer %>

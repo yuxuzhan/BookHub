@@ -18,6 +18,8 @@ $ cd test
 $ sh test.script.sh
 Note:
 The test only run the POST/PUT command since the Get will render html pages
+
+HTML Validator is passing by click "view page source", copy and paste to W3School HTML Validator
 ```
 
 ## Project Structure:
