@@ -1,4 +1,4 @@
-module.exports = function (mongoose, autoIncrement, connection){
+module.exports = function (mongoose, autoIncrement){
     var Schema = mongoose.Schema;
     // set up a mongoose model and pass it using module.exports
     var bookSchema  =  new Schema({

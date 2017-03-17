@@ -12,8 +12,8 @@ var autoIncrement = require('mongoose-auto-increment');
 mongoose.Promise = global.Promise;
 var connection = mongoose.connect('mongodb://localhost/database');
 autoIncrement.initialize(connection);
-var Users = require('./models/user')(mongoose, autoIncrement, connection);
-var Books = require("./models/book")(mongoose, autoIncrement, connection);
+var Users = require('./models/user')(mongoose, autoIncrement);
+var Books = require("./models/book")(mongoose, autoIncrement);
 var Reviews = require("./models/review")(mongoose);
 // Set up to use a session
 app.use(session({
@@ -76,13 +76,8 @@ app.get('/search',function(req, res){
         });
     }
     Books.find({$or: query}, function (err, books) {
-        if (!books){
-            console.log('book not exist');
-            res.sendStatus(400);
-        } else {
-            console.log("search books for: " + req.query['keywords']);
-            res.render('result.ejs',{userid: req.session.userId, books: books});
-        }
+        console.log("search books for: " + req.query['keywords']);
+        res.render('result.ejs',{userid: req.session.userId, books: books});
     });
 });
 

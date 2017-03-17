@@ -57,14 +57,14 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
         if(req.session.userid){
             Users.findOne({'_id' : req.session.userid}, function (err, user) {
                 if (!user){
-                    console.log('user not exist...');
+                    console.log('accessing update denied...user not authenticatd...');
                     res.sendStatus(401);
                 } else {
                     res.render('edit_profile.ejs', { userid: req.session.userId, user:user});
                 }
             });
         } else {
-            console.log("user not authenticated...")
+            console.log("accessing update denied...user not authenticated...")
             res.sendStatus(401);
         }
     });
@@ -73,7 +73,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
     app.put('/users/update', upload.single('file'), function (req, res) {
         console.log("update user...");
         if (!req.session.userid) {
-            console.log("requesting private profile error: user not authenticated...");
+            console.log("requesting private profile denied...user not authenticated...");
             res.sendStatus(401);
         } else {
             Users.findOne({'_id' : req.session.userid}, function (err, user) {
@@ -101,13 +101,13 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
         }
     });
 
-    // Get user's name, status and likes
+    // Get user's profile
     app.get('/users/:id', function (req, res) {
         console.log("requesting profile page for:" + req.params.id);
         Users.findOne({'userId' : req.params.id}, function (err, user) {
             if (!user){
-                console.log("requesting profile page error: user does not exist...");
-                res.sendStatus(401);
+                console.log("bad request...user does not exist...");
+                res.sendStatus(400);
             } else {
                 if (Reviews){
                     Reviews.find({'seller':user.userId},function (err, reviews) {
@@ -134,12 +134,12 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
     app.get('/users/:id/private', function (req, res) {
         console.log("requesting private profile");
         if (req.session.userId != req.params.id){
-            console.log("requesting private profile error: user not authenticated...");
+            console.log("requesting private profile denied...user not authenticated...");
             return res.sendStatus(401);
         }else{
             Users.findOne({'userId' : req.params.id}, function (err, user) {
                 if (!user){
-                    console.log("requesting private profile page error: user does not exist...");
+                    console.log("requesting private profile denied...user not authenticated...");
                     res.sendStatus(401);
                 } else {
                     res.render('private_profile.ejs', {userid: req.params.id, user:user});
@@ -162,9 +162,10 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
     // Log in
     app.post('/login', function (req, res) {
         console.log("login user...")
-        if (!req.body.email || !req.body.password)
-          return res.sendStatus(400);
-
+        if (!req.body.email || !req.body.password){
+            console.log("login bad input...")
+            return res.sendStatus(400);
+        }
         Users.findOne({'email' : req.body.email}, function (err, record) {
           if (!record){
               console.log('user does not exists: ' + req.body.email);
@@ -190,7 +191,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
     app.get('/logout',function(req, res){
         console.log("logout user");
         if(!req.session.userid){
-            console.log("user not logged in, redirect to index page");
+            console.log("requesting logout denied...user not authenticated...");
             res.sendStatus(401);
         } else {
             req.session.destroy(function(err) {

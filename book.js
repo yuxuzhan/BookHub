@@ -1,17 +1,17 @@
 module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs, isbn) {
     //requesting book updating page
     app.get('/books/update/:id',function(req, res,next){
-        console.log("requesting book update page...");
+        console.log("bad request...book update page...");
         Books.findOne({'bookId' : req.params.id}, function (err, book) {
             if (!book){
-                console.log('book not exist');
+                console.log('bad input book not exist');
                 res.sendStatus(400);
             } else {
                 if (book.user === req.session.userid){
                     res.render('update_book.ejs',{userid: req.session.userId, book: book});
                 }
                 else {
-                    console.log("user have no privilege to update this book");
+                    console.log("requesting update page denied...user not authenticated...");
                     res.sendStatus(401);
                 }
             }
@@ -23,7 +23,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs, isb
         console.log("update books");
         Books.findOne({'bookId' : req.params.id}, function (err, book) {
             if (!book){
-                console.log('book not exist');
+                console.log('bad request...book not exist');
                 res.sendStatus(400);
             } else {
                 book.booktitle = req.body.bookname;
@@ -54,7 +54,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs, isb
     app.put('/books/sold/:id',function(req, res){
         console.log('update book to be sold...');
         if(!req.session.userid){
-            console.log("user have no privilege to update this book");
+            console.log("requesting book update denined...user not authenticated");
             res.sendStatus(401);
         } else {
             Books.findOne({'bookId':req.params.id},function(err,book){

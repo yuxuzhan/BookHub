@@ -16,6 +16,12 @@ Enter localhost:3000/ in browser
 ```
 $ cd test
 $ sh test.script.sh
+
+drop db after run the test case
+$ mongo
+$ use database
+$ db.dropDatabase()
+
 Note:
 The test only run the POST/PUT command since the Get will render html pages
 

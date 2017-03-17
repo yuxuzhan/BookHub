@@ -1,4 +1,4 @@
-module.exports = function (mongoose, autoIncrement, connection){
+module.exports = function (mongoose, autoIncrement){
     var Schema = mongoose.Schema;
     // set up a mongoose model and pass it using module.exports
     var userSchema  =  new Schema({
@@ -55,7 +55,6 @@ module.exports = function (mongoose, autoIncrement, connection){
         startAt: 1,
         incrementBy: 1
     });
-
 
     // Doc for Mongoose Connections: http://mongoosejs.com/docs/connections
     return mongoose.model('user', userSchema);
