@@ -77,13 +77,11 @@ app.get('/search',function(req, res){
     }
     Books.find({$or: query}, function (err, books) {
         if (!books){
-            //user (email) already exist
             console.log('book not exist');
-            res.sendStatus(403);
+            res.sendStatus(400);
         } else {
-            console.log("search books for: " + req.query);
+            console.log("search books for: " + req.query['keywords']);
             res.render('result.ejs',{userid: req.session.userId, books: books});
-
         }
     });
 });
@@ -92,6 +90,7 @@ app.get('/search',function(req, res){
 app.get('*', function(req, res){
   res.render("404.ejs",{userid: ""});
 });
+
 var server = app.listen(3000, function() {
   console.log('Running on 127.0.0.1:%s', server.address().port);
 });

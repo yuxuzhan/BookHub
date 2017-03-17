@@ -1,20 +1,18 @@
 module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs, isbn) {
-
     //requesting book updating page
     app.get('/books/update/:id',function(req, res,next){
         console.log("requesting book update page...");
         Books.findOne({'bookId' : req.params.id}, function (err, book) {
             if (!book){
-                //user (email) already exist
                 console.log('book not exist');
-                res.sendStatus(401);
+                res.sendStatus(400);
             } else {
                 if (book.user === req.session.userid){
                     res.render('update_book.ejs',{userid: req.session.userId, book: book});
                 }
                 else {
                     console.log("user have no privilege to update this book");
-                    res.sendStatus(402);
+                    res.sendStatus(401);
                 }
             }
         });
@@ -25,9 +23,8 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs, isb
         console.log("update books");
         Books.findOne({'bookId' : req.params.id}, function (err, book) {
             if (!book){
-                //user (email) already exist
                 console.log('book not exist');
-                res.sendStatus(401);
+                res.sendStatus(400);
             } else {
                 book.booktitle = req.body.bookname;
                 book.author = req.body.author;
@@ -58,7 +55,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs, isb
         console.log('update book to be sold...');
         if(!req.session.userid){
             console.log("user have no privilege to update this book");
-            res.sendStatus(402);
+            res.sendStatus(401);
         } else {
             Books.findOne({'bookId':req.params.id},function(err,book){
                 book.sold = true;

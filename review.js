@@ -20,7 +20,7 @@ app.post('/review/:id',function(req, res){
        } else {
            console.log("successully saved review");
            Users.findOne({'_id' : req.params.id}, function (err, user) {
-                res.redirect('/users/' + user.userId);     
+               res.redirect('/users/' + user.userId);
            });
        }
     });

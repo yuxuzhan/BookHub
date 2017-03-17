@@ -1,5 +1,4 @@
 module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
-
     //get registeration page
     app.get('/users',function(req, res){
         console.log("requesting signup page...");
@@ -20,7 +19,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
       //check if user is already existed in db
       Users.find({'email' : req.body.email}, function (err, records) {
           console.log("checking if user already exists");
-          if (records.length > 0){
+          if (records){
               //user (email) already exist
               console.log('user exists: ' + req.body.email);
               res.render('signup.ejs',{userid: "", error: 'user exists: ' + req.body.email});
@@ -66,7 +65,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
             });
         } else {
             console.log("user not authenticated...")
-            res.sendStatus(402);
+            res.sendStatus(401);
         }
     });
 
@@ -75,7 +74,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
         console.log("update user...");
         if (!req.session.userid) {
             console.log("requesting private profile error: user not authenticated...");
-            return res.sendStatus(402);
+            res.sendStatus(401);
         } else {
             Users.findOne({'_id' : req.session.userid}, function (err, user) {
                 user.phone = req.body.phone;
@@ -107,19 +106,18 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
         console.log("requesting profile page for:" + req.params.id);
         Users.findOne({'userId' : req.params.id}, function (err, user) {
             if (!user){
-                //user (email) already exist
                 console.log("requesting profile page error: user does not exist...");
                 res.sendStatus(401);
             } else {
                 if (Reviews){
-                    Reviews.find({'seller':user._id},function (err, reviews) {
+                    Reviews.find({'seller':user.userId},function (err, reviews) {
                         var sum = 0;
                         reviews.forEach(function(review){
                             sum += parseInt(review.rate);
                         });
                         var score = sum/reviews.length;
                         score = score.toFixed(2);
-                        Books.find({'user':user._id,'sold':false}, function(err, books){
+                        Books.find({'user':user.userId,'sold':false}, function(err, books){
                             res.render('profile.ejs', { userid: req.session.userId, user:user, reviews: reviews, score: score, books: books});
                         });
                     });
@@ -132,17 +130,15 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
         });
     });
 
-    // Get user's private info (email, menus, recently-viewed foods)
+    //get private profile page
     app.get('/users/:id/private', function (req, res) {
         console.log("requesting private profile");
-        // Check if user ID matches that on token
         if (req.session.userId != req.params.id){
             console.log("requesting private profile error: user not authenticated...");
-            return res.sendStatus(402);
+            return res.sendStatus(401);
         }else{
             Users.findOne({'userId' : req.params.id}, function (err, user) {
                 if (!user){
-                    //user (email) already exist
                     console.log("requesting private profile page error: user does not exist...");
                     res.sendStatus(401);
                 } else {
@@ -171,7 +167,6 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
 
         Users.findOne({'email' : req.body.email}, function (err, record) {
           if (!record){
-              //user (email) already exist
               console.log('user does not exists: ' + req.body.email);
               res.render('login.ejs',{userid: "", error:'user does not exists: ' + req.body.email});
           } else {
@@ -191,6 +186,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
         });
     });
 
+    //logout
     app.get('/logout',function(req, res){
         console.log("logout user");
         if(!req.session.userid){
