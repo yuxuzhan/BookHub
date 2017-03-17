@@ -1,19 +1,17 @@
 <% include header%>
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="row">
                 <div class="col-md-12 col-xs-8">
                     <h2><%=book.booktitle%></h2>
                 </div>
-                <div class="col-md-4 col-xs-4">
+                <div class="col-md-3 col-xs-3">
                     <!--book image-->
-                    <img class="img-responsive" src="<%=book.image.data%>" alt="book_img"/>
+                    <img class="img-responsive bookhub_thumb_large" src="<%=book.image.data%>" alt="book_img"/>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <!--book content and discription-->
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
                             <table class="table">
                                 <tbody>
                                     <tr>
@@ -48,14 +46,13 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
+
                 </div>
 
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <h3>About Seller</h3>
             <table class="table">
                 <tbody>
@@ -82,9 +79,18 @@
                 </tbody>
             </table>
             <a href="mailto:<%=seller.email%>" class="btn btn-primary" target="_top" type="text/html">Contact Seller</a>
+            <span class="bookhub_share_label">Share</span>
+            <div id="share"></div>
         </div>
-
     </div>
+
 </div>
 
+<script>
+    $("#share").jsSocials({
+        showCount: false,
+        showLabel: true,
+        shares: ["facebook","twitter","linkedin","googleplus"]
+    });
+</script>
 <% include footer%>

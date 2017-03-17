@@ -31,6 +31,16 @@
     display: block;
     max-height:30px;
 }
+.bookhub_thumb_large{
+    display: block;
+    margin-bottom: 20px;
+}
+.bookhub_share_label{
+    display: block;
+    margin-top: 20px;
+    margin-bottom: -5px;
+    font-weight: bold;
+}
 .bookhub_header_wrapper {
     display: block;
     width: 100%;

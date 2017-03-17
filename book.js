@@ -69,7 +69,6 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs, isb
     //requesting add book page
     app.get('/books',function(req, res,next){
         console.log("requesting add book page...");
-        console.log(req.session);
         if(req.session.userid){
             //user logged in
             res.render('add_book.ejs',{userid: req.session.userId, error:""});
@@ -176,9 +175,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs, isb
         console.log("requesting user's listing page...");
         if(req.session.userid){
             Books.find({'user':req.session.userid,'sold':false}, function (err, books_avaliable) {
-                console.log(books_avaliable);
                 Books.find({'user':req.session.userid,'sold':true}, function (err, books_sold) {
-                    console.log(books_sold);
                     res.render('mypost.ejs',{userid: req.session.userId,books_avaliable:books_avaliable,books_sold:books_sold});
                 });
             });
@@ -196,7 +193,6 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs, isb
                 res.sendStatus(401);
             } else {
                 Users.findOne({'_id' : book.user}, function (err, seller) {
-                    console.log(book.user);
                     if (Reviews){
                         Reviews.find({'seller': book.user},function (err, reviews) {
                             var sum = 0;
