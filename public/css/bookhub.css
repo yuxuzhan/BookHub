@@ -1,3 +1,44 @@
+.bookhub_search_description {
+  display: block; /* or inline-block */
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em;
+  line-height: 1.2em;
+}
+.bookhub_search_thumb_wrapper{
+    padding: 5px 10%;
+}
+.bookhub_search_thumb{
+    display: block;
+    height: 100px;
+    max-width: 100%;
+    margin: auto;
+}
+.bookhub_search_item_wrapper,.bookhub_review_item_wrapper{
+    border-bottom: 1px solid SILVER;
+    padding-top: 15px;
+}
+.bookhub_search_item_wrapper:hover,.bookhub_review_item_wrapper:hover{
+    background-color: WHITESMOKE;
+}
+.bookhub_search_isbn,.bookhub_review_rate{
+    color:grey;
+}
+.bookhub_search_title{
+    font-size: 18px;
+}
+.bookhub_search_price{
+    font-size: 20px;
+    color:YELLOWGREEN;
+}
+.bookhub_review_buyer{
+    display: block;
+    color:STEELBLUE;
+}
+.bookhub_review_comment{
+    margin-top: 10px;
+}
 .body_image {
   background: url('../img/uoft_campus.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;

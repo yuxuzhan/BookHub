@@ -2,23 +2,24 @@
 <div class="container">
 <h2>My Listings</h2>
     <div class="row">
+        <div class="col-md-12">
         <a href="/books" class="btn btn-md btn-primary button_right">add new book</a>
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="pill" href="#active">Active</a></li>
             <li><a data-toggle="pill" href="#sold">Sold</a></li>
-          </ul>
+        </ul>
           <div class="tab-content">
             <div id="active" class="tab-pane fade in active">
               <div class="bookhub_listing_pannel">
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                          <th>Picture</th>
+                          <th class="hidden-xs hidden-sm">Picture</th>
                           <th>Title</th>
-                          <th>Author</th>
-                          <th>ISBN</th>
-                          <th>Course Code</th>
-                          <th>Condition</th>
+                          <th class="hidden-xs hidden-sm">Author</th>
+                          <th class="hidden-xs hidden-sm">ISBN</th>
+                          <th class="hidden-xs hidden-sm">Course Code</th>
+                          <th class="hidden-xs hidden-sm">Condition</th>
                           <th>Price</th>
                           <th>Action</th>
                         </tr>
@@ -27,12 +28,28 @@
                         <% if(books_avaliable) {%>
                             <% for (var i=0; i < books_avaliable.length; i++) {%>
                             <tr>
-                                <td><img class="bookhub_thumb_img" alt="" src="<%=books_avaliable[i].image.data%>"></td>
+                                <td class="hidden-xs hidden-sm"><img class="bookhub_thumb_img" alt="" src="<%=books_avaliable[i].image.data%>"></td>
                                 <td><a href="/books/<%=books_avaliable[i].bookId%>"><%=books_avaliable[i].booktitle%></a></td>
-                                <td><%=books_avaliable[i].author%></td>
-                                <td><%=books_avaliable[i].ISBN%></td>
-                                <td><%=books_avaliable[i].courseCode%></td>
-                                <td><%=books_avaliable[i].condition%></td>
+                                <td class="hidden-xs hidden-sm"><%=books_avaliable[i].author%></td>
+                                <td class="hidden-xs hidden-sm">
+                                    <% if(books_avaliable[i].ISBN){%>
+                                        <%= books_avaliable[i].ISBN %>
+                                    <% } else {%>
+                                            N/A
+                                    <% } %>
+                                </td>
+                                <td class="hidden-xs hidden-sm"><%=books_avaliable[i].courseCode%></td>
+                                <td class="hidden-xs hidden-sm">
+                                    <% if(books_avaliable[i].condition == 4){%>
+                                        New
+                                    <% } else if(books_avaliable[i].condition == 3){%>
+                                        Good
+                                    <% } else if(books_avaliable[i].condition == 2) {%>
+                                        Fair
+                                    <% } else {%>
+                                        Poor
+                                    <% } %>
+                                </td>
                                 <td><%=books_avaliable[i].price%></td>
                                 <td><a href='/books/update/<%=books_avaliable[i].bookId%>'>edit</a><br/>
                                     <a class="sold_book" id="/books/sold/<%=books_avaliable[i].bookId%>" href="">sold</a>
@@ -50,12 +67,12 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Picture</th>
+                            <th class="hidden-xs hidden-sm">Picture</th>
                             <th>Title</th>
-                            <th>Author</th>
-                            <th>ISBN</th>
-                            <th>Course Code</th>
-                            <th>Condition</th>
+                            <th class="hidden-xs hidden-sm">Author</th>
+                            <th class="hidden-xs hidden-sm">ISBN</th>
+                            <th class="hidden-xs hidden-sm">Course Code</th>
+                            <th class="hidden-xs hidden-sm">Condition</th>
                             <th>Price</th>
                         </tr>
                     </thead>
@@ -63,12 +80,28 @@
                         <% if(books_sold) {%>
                             <% for (var i=0; i < books_sold.length; i++) {%>
                             <tr>
-                                <td><img class="bookhub_thumb_img" alt="" src="<%=books_sold[i].image.data%>"></td>
+                                <td class="hidden-xs hidden-sm"><img class="bookhub_thumb_img" alt="" src="<%=books_sold[i].image.data%>"></td>
                                 <td><a href="/books/<%=books_sold[i].bookId%>"><%=books_sold[i].booktitle%></a></td>
-                                <td><%=books_sold[i].author%></td>
-                                <td><%=books_sold[i].ISBN%></td>
-                                <td><%=books_sold[i].courseCode%></td>
-                                <td><%=books_sold[i].condition%></td>
+                                <td class="hidden-xs hidden-sm"><%=books_sold[i].author%></td>
+                                <td class="hidden-xs hidden-sm">
+                                    <% if(books_sold[i].ISBN){%>
+                                        <%= books_sold[i].ISBN %>
+                                    <% } else {%>
+                                            N/A
+                                    <% } %>
+                                </td>
+                                <td class="hidden-xs hidden-sm"><%=books_sold[i].courseCode%></td>
+                                <td class="hidden-xs hidden-sm">
+                                    <% if(books_sold[i].condition == 4){%>
+                                        New
+                                    <% } else if(books_sold[i].condition == 3){%>
+                                        Good
+                                    <% } else if(books_sold[i].condition == 2) {%>
+                                        Fair
+                                    <% } else {%>
+                                        Poor
+                                    <% } %>
+                                </td>
                                 <td><%=books_sold[i].price%></td>
                             </tr>
                             <% } %>
@@ -78,6 +111,7 @@
               </div>
             </div>
           </div>
+    </div>
     </div>
 </div>
 <script src="/js/my_post.js"></script>

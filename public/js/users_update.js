@@ -15,12 +15,12 @@ $('#submit').click(function(){
             processData: false,
             contentType: false,
             success: function(data) {
-                $(location).attr("href", '/users/' + user_id + '/private');
+                $(location).attr("href", '/users/' + user_id);
             }
         }).done(function(data) {
-            $(location).attr("href", '/users/' + user_id + '/private');
+            $(location).attr("href", '/users/' + user_id);
         });
-        $(location).attr("href", '/users/' + user_id + '/private');
+        $(location).attr("href", '/users/' + user_id);
     } else{
         alert('make sure passwords are same');
         return false;

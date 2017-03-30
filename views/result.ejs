@@ -38,28 +38,33 @@
     </div>
 </div>
 <div class="container">
-    <div class="row">
-    <div class="col-md-12">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                  <th>Picture</th>
-                  <th>Title</th>
-                  <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (var i=0; i < books.length; i++){ %>
-                <tr>
-                    <td><img class="bookhub_thumb_img" src="<%= books[i].image.data %>" alt="book_image"></td>
-                    <td><a href="/books/<%= books[i].bookId %>"><%= books[i].booktitle %></a></td>
-                    <td><%= books[i].price %></td>
-                </tr>
-                <% } %>
-            </tbody>
-
-        </table>
+    <% for (var i=0; i < books.length; i++){ %>
+    <div class="row bookhub_search_item_wrapper">
+    <div class="col-md-3 col-sm-3 col-xs-3 bookhub_search_thumb_wrapper">
+        <img class="bookhub_search_thumb" src="<%= books[i].image.data %>" alt="book_image">
+    </div>
+    <div class="col-md-9 col-sm-9 col-xs-9">
+        <div class="row">
+            <div class="col-md-10 col-sm-10 col-xs-10">
+                <a class="bookhub_search_title" href="/books/<%= books[i].bookId %>"><%= books[i].booktitle %></a>
+                <br/>
+                <span class="bookhub_search_isbn">ISBN:
+                    <% if(books[i].ISBN){%>
+                        <%= books[i].ISBN %>
+                    <% }else{ %>
+                        N/A
+                    <% } %>
+                </span>
+                <p class="hidden-xs hidden-sm bookhub_search_description"><%= books[i].description %></p>
+                <br/>
+                <span class="bookhub_search_isbn">Posted on: <%= books[i].created_at %></span>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-2">
+                <p class="bookhub_search_price">$<%= books[i].price %></p>
+            </div>
+        </div>
     </div>
     </div>
+    <% } %>
 </div>
 <% include footer %>

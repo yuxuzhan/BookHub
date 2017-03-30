@@ -75,7 +75,7 @@ app.get('/search',function(req, res){
             query.push(l);
         });
     }
-    Books.find({$or: query}, function (err, books) {
+    Books.find({$or: query}).sort({created_at: 'descending'}).exec(function(err, books) {
         console.log("search books for: " + req.query['keywords']);
         res.render('result.ejs',{userid: req.session.userId, books: books});
     });

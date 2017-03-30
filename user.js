@@ -45,7 +45,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
                  req.session.user = newUser.name;
                  req.session.userid = newUser._id;
                  req.session.userId = newUser.userId;
-                 res.redirect('/users/' + newUser.userId + '/private');
+                 res.redirect('/users/' + newUser.userId);
             });
           }
       });
@@ -177,7 +177,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
                   req.session.user = record.name;
                   req.session.userid = record._id;
                   req.session.userId = record.userId;
-                  res.redirect('/users/' + record.userId + '/private');
+                  res.redirect('/users/' + record.userId);
               } else {
                   //validation failed
                   console.log("failed logined user: " + req.body.email + ' incorrect password');
