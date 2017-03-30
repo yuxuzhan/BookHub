@@ -9,8 +9,12 @@ $("#cart_add").click(function() {
        url: '/cart',
        method: 'POST',
        data: {'bookid' : $('#cart_bookid').text()},
-   }).done(function(data){
-       location.reload();
-   });
-
+       statusCode:{
+           403: function(){
+               alert("You have already added this book to your cart!");
+           }
+       }
+   }).done(function(data) {
+        $(location).attr("href", "/cart");
+    });
 });
