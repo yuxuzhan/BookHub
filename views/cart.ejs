@@ -1,0 +1,44 @@
+<% include header%>
+<div class="container">
+<h2>My Cart</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+          <th class="hidden-xs hidden-sm">Picture</th>
+          <th>Title</th>
+          <th class="hidden-xs hidden-sm">Course Code</th>
+          <th class="hidden-xs hidden-sm">Condition</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if(books) {%>
+            <% for (var i=0; i < books.length; i++) {%>
+            <tr>
+                <td class="hidden-xs hidden-sm"><img class="bookhub_thumb_img" alt="" src="<%=books[i].image.data%>"></td>
+                <td><a href="/books/<%=books[i].bookId%>"><%=books[i].booktitle%></a></td>
+                <td class="hidden-xs hidden-sm"><%=books[i].courseCode%></td>
+                <td class="hidden-xs hidden-sm">
+                    <% if(books[i].condition == 4){%>
+                        New
+                    <% } else if(books[i].condition == 3){%>
+                        Good
+                    <% } else if(books[i].condition == 2) {%>
+                        Fair
+                    <% } else {%>
+                        Poor
+                    <% } %>
+                </td>
+                <td><%=books[i].price%></td>
+                <td>
+                    <a class="delete_cart" id="/carts/<%=books[i]._id%>" href="">delete</a>
+                </td>
+            </tr>
+            <% } %>
+        <% } %>
+    </tbody>
+</table>
+</div>
+<script src="/js/my_cart.js"></script>
+<% include footer%>

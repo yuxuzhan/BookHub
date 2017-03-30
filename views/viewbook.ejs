@@ -6,6 +6,10 @@
                 <div class="col-md-12 col-xs-8">
                     <h2><%=book.booktitle%></h2>
                 </div>
+                <% if(userid){ %>
+                    <span id="cart_bookid" class="hidden"><%= book._id %></span>
+                    <button id="cart_add" class="btn btn-md btn-primary button_right">Add to cart</button>
+                <% } %>
                 <div class="col-md-3 col-xs-3">
                     <!--book image-->
                     <img class="img-responsive bookhub_thumb_large" src="<%=book.image.data%>" alt="book_img"/>

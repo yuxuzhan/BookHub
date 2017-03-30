@@ -15,6 +15,8 @@ autoIncrement.initialize(connection);
 var Users = require('./models/user')(mongoose, autoIncrement);
 var Books = require("./models/book")(mongoose, autoIncrement);
 var Reviews = require("./models/review")(mongoose);
+var Carts = require("./models/cart")(mongoose);
+
 // Set up to use a session
 app.use(session({
   secret: 'super_secret',
@@ -37,6 +39,8 @@ require('./user.js')(app, mongoose, Users, Reviews, Books, upload, fs);
 require('./book.js')(app, mongoose, Users, Reviews, Books, upload, fs, isbn);
 //Review endpoints
 require('./review.js')(app, mongoose, Reviews, Users);
+//Carts endpoints
+require('./cart.js')(app, mongoose, Books, Carts);
 
 app.get('/',function(req, res,next){
     console.log('requesting home page');
