@@ -14,6 +14,13 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
     app.post('/users', upload.single('file'), function (req, res) {
        console.log("register user");
       // Validation, if any of email, name password is empty, error code: 400
+      if(req.session.captcha != req.body.captcha){
+          console.log(req.session.captcha);
+          console.log(req.body.captcha);
+          return res.send("Robot cannot register");
+
+      }
+
       if (!req.body.email || !req.body.name || !req.body.password)
           return res.sendStatus(400);
       //check if user is already existed in db

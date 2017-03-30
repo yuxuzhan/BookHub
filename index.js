@@ -7,6 +7,8 @@ var app = express();
 var multer = require('multer');
 var upload = multer({ dest: './public/uploads' });
 var isbn = require('./isbn');
+var svgCaptcha = require('svg-captcha');
+
 
 var autoIncrement = require('mongoose-auto-increment');
 mongoose.Promise = global.Promise;
@@ -85,10 +87,20 @@ app.get('/search',function(req, res){
     });
 });
 
+app.get('/captcha', function (req, res) {
+	var captcha = svgCaptcha.create();
+	req.session.captcha = captcha.text;
+
+	res.set('Content-Type', 'image/svg+xml');
+	res.status(200).send(captcha);
+});
+
 /*page not found error 404*/
 app.get('*', function(req, res){
   res.render("404.ejs",{userid: ""});
 });
+
+
 
 var server = app.listen(3000, function() {
   console.log('Running on 127.0.0.1:%s', server.address().port);
