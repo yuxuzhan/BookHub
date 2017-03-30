@@ -15,8 +15,8 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
        console.log("register user");
       // Validation, if any of email, name password is empty, error code: 400
       if(req.session.captcha != req.body.captcha){
-          console.log(req.session.captcha);
-          console.log(req.body.captcha);
+          //console.log(req.session.captcha);
+          //console.log(req.body.captcha);
           return res.send("Robot cannot register");
 
       }
