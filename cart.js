@@ -1,15 +1,22 @@
 module.exports = function (app, mongoose, Books, Carts) {
     app.post('/cart',function(req, res){
+        console.log("requesting add item to cart");
         if(!req.session.userid){
             console.log("requesting add cart denied...user not authenticated...");
             res.sendStatus(401);
         } else {
-            var cart = new Carts();
-            cart.userid = req.session.userid;
-            cart.bookid = req.body.bookid;
-            cart.save(function(err, newCart) {
-               console.log("successully add book to cart");
-           });
+            Carts.findOne({'bookid' : req.body.bookid, 'userid' : req.session.userid}, function(err,cart){
+                if(cart){
+                    res.sendStatus(403);
+                } else {
+                    var cart = new Carts();
+                    cart.userid = req.session.userid;
+                    cart.bookid = req.body.bookid;
+                    cart.save(function(err, newCart) {
+                       console.log("successully add book to cart");
+                   });
+                }
+            });
         }
     });
 
@@ -31,15 +38,15 @@ module.exports = function (app, mongoose, Books, Carts) {
         }
     });
 
-    app.delete('/cart:id',function(req, res){
+    app.delete('/cart',function(req, res){
+        console.log("delete cart item");
         if(!req.session.userid){
             console.log("requesting delete cart denied...user not authenticated...");
             res.sendStatus(401);
         } else {
-            Carts.findOne({'_id' : req.query.id}, function(req,cart){
+            Carts.findOne({'bookid' : req.query.id, 'userid' : req.session.userid}, function(req,cart){
                if(cart){
-                   // remove the cart item with id
-                   record.remove();
+                   cart.remove();
                }
            });
         }
