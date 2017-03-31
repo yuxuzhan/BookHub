@@ -17,8 +17,7 @@ module.exports = function (app, mongoose, Users, Reviews, Books, upload, fs) {
       if(req.session.captcha != req.body.captcha){
           //console.log(req.session.captcha);
           //console.log(req.body.captcha);
-          return res.send("Robot cannot register");
-
+          return res.render('signup.ejs',{userid: "", error: "Please Enter the correct captcha"});
       }
 
       if (!req.body.email || !req.body.name || !req.body.password)
