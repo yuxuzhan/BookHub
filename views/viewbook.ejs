@@ -2,59 +2,54 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
+            <h2 class="bookhub_book_title"><%=book.booktitle%></h2>
             <div class="row">
-                <div class="col-md-12 col-xs-8">
-                    <h2><%=book.booktitle%></h2>
-                </div>
-                <div class="col-md-3 col-xs-3">
-                    <!--book image-->
+                <div class="col-md-3">
                     <img class="img-responsive bookhub_thumb_large" src="<%=book.image.data%>" alt="book_img"/>
                     <div class="bookhub_cart_btn_wrapper">
                         <% if(userid){ %>
                             <span id="cart_bookid" class="hidden"><%= book._id %></span>
-                            <a id="cart_add" href="/cart" class="btn btn-md btn-primary">Add to cart</a>
+                            <a id="cart_add" href="/cart" class="btn btn-primary">Add to cart</a>
                         <% } %>
                     </div>
                 </div>
                 <div class="col-md-9">
                     <!--book content and discription-->
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <th>Author</th>
-                                        <td><%=book.author%></td>
-                                    </tr>
-                                    <tr>
-                                        <th>ISBN</th>
-                                        <td><%=book.ISBN%></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Course Code</th>
-                                        <td><%=book.courseCode%></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Price</th>
-                                        <td>$ <%=book.price%></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Condition</th>
-                                        <td>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Author</th>
+                                <td><%=book.author%></td>
+                            </tr>
+                            <tr>
+                                <th>ISBN</th>
+                                <td><%=book.ISBN%></td>
+                            </tr>
+                            <tr>
+                                <th>Course Code</th>
+                                <td><%=book.courseCode%></td>
+                            </tr>
+                            <tr>
+                                <th>Price</th>
+                                <td>$ <%=book.price%></td>
+                            </tr>
+                            <tr>
+                                <th>Condition</th>
+                                <td>
 
-                                            <% if (book.condition === 1) { %> Poor
-                                            <% } else if ( book.condition === 2) { %> Fair
-                                            <% } else if ( book.condition === 3) { %> Good
-                                            <% } else { %> As New <% } %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Description</th>
-                                        <td><%=book.description%></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
+                                    <% if (book.condition === 1) { %> Poor
+                                    <% } else if ( book.condition === 2) { %> Fair
+                                    <% } else if ( book.condition === 3) { %> Good
+                                    <% } else { %> As New <% } %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td><%=book.description%></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-
             </div>
         </div>
 
@@ -85,6 +80,7 @@
                 </tbody>
             </table>
             <a href="mailto:<%=seller.email%>" class="btn btn-primary" target="_top" type="text/html">Contact Seller</a>
+
             <span class="bookhub_share_label">Share</span>
             <div id="share"></div>
         </div>

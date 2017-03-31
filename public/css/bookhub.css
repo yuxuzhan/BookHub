@@ -95,7 +95,7 @@
 }
 .bookhub_thumb_large{
     display: block;
-    min-width: 100%;
+    width: 100%;
 }
 .bookhub_share_label{
     display: block;
@@ -242,5 +242,11 @@ footer p{
         min-height: 500px;
         overflow-y: visible;
     }
-
+    .bookhub_thumb_large{
+        width: 30%;
+        margin: auto;
+    }
+    .bookhub_book_title{
+        text-align: center;
+    }
 }
