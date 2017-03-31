@@ -25,4 +25,5 @@ $('#submit').click(function(){
         alert('make sure passwords are same');
         return false;
     }
+    $(location).attr("href", '/users/' + user_id);
 });
