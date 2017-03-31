@@ -31,7 +31,7 @@ module.exports = function (app, mongoose, Books, Carts) {
                 carts.forEach(function(cart){
                     ids.push(cart.bookid);
                 });
-                Books.find({'_id' : { "$in" : ids}}, function(err,books){
+                Books.find({'_id' : { "$in" : ids},'sold' : false}, function(err,books){
                     res.render('cart.ejs',{userid: req.session.userId, books: books});
                 });
             });
