@@ -1,112 +1,100 @@
 <% include header%>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-4">
-            <h2><%= user.name %></h2>
-        </div>
         <div class="col-md-4">
-            <img src="<%=user.image.data %>" class="bookhub_profile_img" alt="profile_img"/>
+        <div class="bookhub_profile_info_wrapper">
+            <img src="<%=user.image.data %>" class="img-circle bookhub_profile_img" alt="profile_img"/>
+            <h3 class="bookhub_profile_name"><%= user.name %></h3>
+            <div class="bookhub_profile_info_content">
+                <p>Score: <% if(isNaN(score)) {%>No score yet
+                            <% }else{ %><%= score %>/5<% } %>
+                </p>
+                <p>Phone: <%= user.phone %></p>
+                <p>Email: <%= user.email %></p>
+            </div>
+            <ul class="nav bookhub_profile_nav">
+                <li class="active"><a href="#reviews" data-toggle="tab"><span class="glyphicon glyphicon-thumbs-up bookhub_profil_glyphicon" aria-hidden="true"></span>Reviews</a></li>
+                <li><a href="#listings" data-toggle="tab"><span class="glyphicon glyphicon-list-alt bookhub_profil_glyphicon" aria-hidden="true"></span>Listings</a></li>
+            </ul>
         </div>
+        </div>
+
         <div class="col-md-8">
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <th>Email</th>
-                        <td><%= user.email %></td>
-                    </tr>
-                    <tr>
-                        <th>Phone</th>
-                        <td><%= user.phone %></td>
-                    </tr>
-                    <tr>
-                        <th>Score</th>
-                        <% if(isNaN(score)) {%>
-                        <td>No score yet</td>
-                        <% }else{ %>
-                        <td><%= score %>/5</td>
-                        <% } %>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="pill" href="#review">Reviews</a></li>
-            <li><a data-toggle="pill" href="#listing">Listings</a></li>
-        </ul>
-
-        <div class="tab-content">
-        <div id="review" class="tab-pane fade in active">
-            <div class="col-md-12">
-            <% for (var i=0; i < reviews.length; i++){ %>
-            <div class="row bookhub_review_item_wrapper">
-                <div class="col-md-12">
-                    <p class="bookhub_review_comment"><%= reviews[i].review %></p>
-                    <span class="bookhub_review_rate">Rating: <%= reviews[i].rate %>/5</span>
-                    <span class="bookhub_review_buyer"><%= reviews[i].buyer %></span>
-                    <span class="bookhub_review_rate"><%= reviews[i].created_at %></span>
-                </div>
-
-
-            </div>
-            <% } %>
-            </div>
-
-            <% if(userid && userid!=user.userId){ %>
-            <form method="post" action="/review/<%= user.userId %>">
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label>Review the seller</label>
-                        <textarea class="form-control" name="review" rows="3"></textarea>
+            <div class="bookhub_profile_well">
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="reviews">
+                <% if(reviews.length > 0){ %>
+                    <% for (var i=0; i < reviews.length; i++){ %>
+                    <div class="bookhub_review_item_wrapper">
+                        <span class="bookhub_review_buyer"><span class="glyphicon glyphicon-user bookhub_profil_glyphicon" aria-hidden="true"></span><%= reviews[i].buyer %></span>
+                        <p class="bookhub_review_rate">
+                            <% for(var j=0; j < reviews[i].rate; j++){ %>
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <% } %>
+                            <% for(var j=reviews[i].rate; j < 5; j++){ %>
+                                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                            <% } %>
+                        </p>
+                        <p class="bookhub_review_comment"><%= reviews[i].review %></p>
+                        <span class="bookhub_review_date"><%= reviews[i].created_at %></span>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-2">
-                    <label for="rate">Rate the seller</label>
-                        <select class="form-control" name="rate" id="rate">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-            <% } %>
-        </div>
+                    <% } %>
+                <% } else { %>
+                    <p class="bookhub_review_date">No reviews yet...</p>
+                <% } %>
 
-        <div id="listing" class="tab-pane fade">
-            <div class="row">
-            <div class="col-md-12">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                          <th>Picture</th>
-                          <th>Title</th>
-                          <th>Course Code</th>
-                          <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% for (var i=0; i < books.length; i++){ %>
-                        <tr>
-                            <td><img class="bookhub_thumb_img" src="<%= books[i].image.data %>" alt="book_image"></td>
-                            <td><a href="/books/<%= books[i].bookId %>"><%= books[i].booktitle %></a></td>
-                            <td><%= books[i].courseCode %></td>
-                            <td><%= books[i].price %></td>
-                        </tr>
-                        <% } %>
-                    </tbody>
-                </table>
-            </div>
-            </div>
-        </div>
+                    <% if(userid && userid!=user.userId){ %>
+                    <form class="lg_top_margin" method="post" action="/review/<%= user.userId %>">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label>Review the seller</label>
+                                <textarea class="form-control" name="review" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4 col-sm-6 col-xs-6">
+                            <label for="rate">Rate the seller</label>
+                                <select class="form-control" name="rate" id="rate">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary md_top_margin">Submit</button>
+                        </div>
+                    </form>
+                    <% } %>
+                </div>
 
+                <div class="tab-pane fade" id="listings">
+                    <% if(books.length > 0){ %>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                  <th>Picture</th>
+                                  <th>Title</th>
+                                  <th>Course Code</th>
+                                  <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (var i=0; i < books.length; i++){ %>
+                                <tr>
+                                    <td><img class="bookhub_thumb_img" src="<%= books[i].image.data %>" alt="book_image"></td>
+                                    <td><a href="/books/<%= books[i].bookId %>"><%= books[i].booktitle %></a></td>
+                                    <td><%= books[i].courseCode %></td>
+                                    <td><%= books[i].price %></td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    <% } else { %>
+                        <p class="bookhub_review_date">No book listed yet...</p>
+                    <% } %>
+                </div>
+            </div>
         </div>
         </div>
     </div>

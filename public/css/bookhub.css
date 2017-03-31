@@ -1,3 +1,6 @@
+.bookhub_index_label{
+    font-size: 18px;
+}
 .bookhub_search_description {
   display: block; /* or inline-block */
   text-overflow: ellipsis;
@@ -15,14 +18,14 @@
     max-width: 100%;
     margin: auto;
 }
-.bookhub_search_item_wrapper,.bookhub_review_item_wrapper{
+.bookhub_search_item_wrapper{
     border-bottom: 1px solid SILVER;
     padding-top: 15px;
 }
-.bookhub_search_item_wrapper:hover,.bookhub_review_item_wrapper:hover{
+.bookhub_search_item_wrapper:hover{
     background-color: WHITESMOKE;
 }
-.bookhub_search_isbn,.bookhub_review_rate{
+.bookhub_search_isbn{
     color:grey;
 }
 .bookhub_search_title{
@@ -32,8 +35,23 @@
     font-size: 20px;
     color:YELLOWGREEN;
 }
+
+.bookhub_review_item_wrapper{
+    border-bottom: 1px solid SILVER;
+    padding: 15px 5px 0 5px;
+}
+.bookhub_review_item_wrapper:hover{
+    background-color: GAINSBORO;
+}
+.bookhub_review_rate{
+    color: #FFC300;
+    float: right;
+}
+.bookhub_review_date{
+    color:grey;
+}
 .bookhub_review_buyer{
-    display: block;
+    font-size: 15px;
     color:STEELBLUE;
 }
 .bookhub_review_comment{
@@ -56,7 +74,10 @@
 	width: 100%;
 	padding: 15% 5%;
 }
-.btn-md-margin{
+.lg_top_margin{
+	margin-top: 30px;
+}
+.md_top_margin{
 	margin-top: 25px;
 }
 .bookhub_logo{
@@ -91,8 +112,9 @@
 }
 
 .button_right{
-	float:right;
 	display: block;
+    float:right;
+    margin-top: -30px;
 }
 .error_page{
     width: 50%;
@@ -103,6 +125,55 @@
     margin: 10px auto 20px auto;
     text-align: center;
 }
+.bookhub_profile_name{
+    text-align: center;
+    color:STEELBLUE;
+}
+.bookhub_profile_info_wrapper{
+    background-color: WHITESMOKE;
+    border-radius: 5px;
+    padding: 20px 0px;
+    margin-bottom: 20px;
+}
+.bookhub_profile_info_content{
+    margin: 0 5%;
+}
+.bookhub_profile_info_content p{
+    text-align: center;
+    font-size: 15px;
+    color:LIGHTSLATEGRAY;
+}
+.bookhub_profile_nav{
+    width: 100%;
+    display: block;
+    margin: 0;
+}
+.bookhub_profile_nav li{
+    border-bottom: solid 1px GAINSBORO;
+}
+.bookhub_profile_nav li a{
+    color: LIGHTSLATEGRAY;
+    font-size: 15px;
+}
+.bookhub_profile_nav>.active>a, .bookhub_profile_nav>.active>a:hover, .bookhub_profile_nav>.active>a:focus{
+    border-left: solid 2px STEELBLUE;
+    color: STEELBLUE;
+    background-color: GAINSBORO;
+}
+.bookhub_profil_glyphicon{
+    margin-right: 10px;
+}
+.bookhub_profile_well{
+    background-color: WHITESMOKE;
+    border-radius: 5px;
+    padding: 20px;
+    height: 500px;
+    overflow-y:scroll;
+}
+.empty_msg{
+    font-size: 18px;
+}
+
 /*footer style*/
 footer {
   background-color: GAINSBORO;
@@ -113,4 +184,63 @@ footer p{
 	color: DIMGRAY;
     text-align: right;
     text-decoration: none;
+}
+.panel.with-nav-tabs .panel-heading{
+    padding: 5px 5px 0 5px;
+}
+.panel.with-nav-tabs .nav-tabs{
+	border-bottom: none;
+}
+.panel.with-nav-tabs .nav-justified{
+	margin-bottom: -1px;
+}
+/********************************************************************/
+/*** PANEL DEFAULT ***/
+.with-nav-tabs.panel-default .nav-tabs > li > a,
+.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+    color: #777;
+}
+.with-nav-tabs.panel-default .nav-tabs > .open > a,
+.with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+    color: #777;
+	background-color: #ddd;
+	border-color: transparent;
+}
+.with-nav-tabs.panel-default .nav-tabs > li.active > a,
+.with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
+	color: #555;
+	background-color: #fff;
+	border-color: #ddd;
+	border-bottom-color: transparent;
+}
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a {
+    color: #777;
+}
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+    background-color: #ddd;
+}
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+    color: #fff;
+    background-color: #555;
+}
+
+@media screen and (max-width: 992px) {
+    .bookhub_profile_well{
+        height: auto;
+        min-height: 500px;
+        overflow-y: visible;
+    }
+
 }

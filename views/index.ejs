@@ -4,12 +4,12 @@
     <form method="get" action="/search">
     <div class="row">
         <div class="form-group col-md-4">
-            <label for="search_keywords">Search</label>
+            <label class="bookhub_index_label" for="search_keywords">Search</label>
             <input type="text" name="keywords" class="form-control" id="search_keywords" placeholder="Search book by title/ course code/ ISBN...">
         </div>
 
         <div class="form-group col-md-3">
-            <label for="condition_filter">Condition</label>
+            <label class="bookhub_index_label" for="condition_filter">Condition</label>
             <select  class="form-control" name="condition" id="condition_filter">
                 <option value="3">Better Than Good</option>
                 <option value="2">Better Than Fair</option>
@@ -19,7 +19,7 @@
         </div>
 
         <div class="form-group col-md-3">
-            <label for="price_filter">Price</label>
+            <label class="bookhub_index_label" for="price_filter">Price</label>
             <select class="form-control" name="price" id="price_filter">
                 <option value="20">less than $20</option>
                 <option value="40">less than $40</option>
@@ -31,7 +31,7 @@
         </div>
 
         <div class="form-group col-md-2" >
-            <button type="submit" class="form-control btn btn-default btn-md-margin">Submit</button>
+            <button type="submit" class="form-control btn btn-default lg_top_margin">Submit</button>
         </div>
     </div>
     </form>

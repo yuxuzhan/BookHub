@@ -44,11 +44,24 @@ module.exports = function (app, mongoose, Books, Carts) {
             console.log("requesting delete cart denied...user not authenticated...");
             res.sendStatus(401);
         } else {
-            Carts.findOne({'bookid' : req.query.id, 'userid' : req.session.userid}, function(req,cart){
-               if(cart){
-                   cart.remove();
-               }
-           });
+            //delete cart single cart item with bookid
+            if(req.query.id){
+                Carts.findOne({'bookid' : req.query.id, 'userid' : req.session.userid}, function(req,cart){
+                   if(cart){
+                       cart.remove();
+                       res.sendStatus(200);
+                   }
+               });
+           } else {
+               Carts.find({'userid' : req.session.userid}, function(req,carts){
+                  if(carts.length > 0){
+                      carts.forEach(function(cart){
+                         cart.remove();
+                      });
+                      res.sendStatus(200);
+                  }
+              });
+           }
         }
     });
 }
